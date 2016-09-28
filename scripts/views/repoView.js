@@ -6,14 +6,14 @@
 
   repoView.renderRepos = function() {
     $('#about .repos').empty().append(
-      reposObj.withTheAttribute('name')
+      repos.withTheAttribute('name')
       .map(repoCompiler)
     );
     $('#about .followers').empty().append(
-       reposObj.followers.map(followersCompiler)
+       repos.followers.map(followersCompiler)
      );
   };
-  reposObj.requestRepos(repoView.renderRepos);
+  repos.requestRepos(repoView.renderRepos);
 
   module.repoView = repoView;
 })(window);

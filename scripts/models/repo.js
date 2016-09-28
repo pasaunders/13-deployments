@@ -1,14 +1,11 @@
 (function(module) {
-  var reposObj = {};
+  var repos = {};
 
-  reposObj.allRepos = [];
-  reposObj.followers = [];
-
-  reposObj.requestRepos = function(callback) {
-    // NOTE: refactor this request into an $.ajax call
+  repos.requestRepos = function(callback) {
+    // TODO: refactor these requests into an $.ajax call
     $.when(
      $.ajax({
-       url: 'https://api.github.com/users/codefellows-seattle-301d9/repos' +
+       url: 'https://api.github.com/users/codefellows-seattle-301d12/repos' +
             '?per_page=10' +
             '&sort=updated',
        type: 'GET',
@@ -16,7 +13,7 @@
        success: function(data) {
          // NOTE: since the 'data' paramter comes back as an
          // array of objects, we can reassign allRepos below.
-         reposObj.allRepos = data;
+         repos.allRepos = data;
        }
      }),
      $.ajax({
@@ -26,17 +23,17 @@
        type: 'GET',
        headers: { 'Authorization': 'token ' + githubToken },
        success: function(data) {
-         reposObj.followers = data;
+         repos.followers = data;
        }
      })
     ).done(callback);
   };
 
-  reposObj.withTheAttribute = function(attr) {
-    return reposObj.allRepos.filter(function(aRepo) {
+  repos.withTheAttribute = function(attr) {
+    return repos.allRepos.filter(function(aRepo) {
       return aRepo[attr];
     });
   };
 
-  module.reposObj = reposObj;
+  module.repos = repos;
 })(window);
