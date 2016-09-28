@@ -4,7 +4,7 @@
   repos.requestRepos = function(callback) {
     // TODO: refactor these requests into an $.ajax call
     $.when(
-     $.get('/github/users/codefellows-seattle-301d12')
+     $.get('/github/users/codefellows-seattle-301d12/repos')
      .done(function(data) {
        repos.allRepos = data;
      }),
